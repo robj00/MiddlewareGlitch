@@ -4,6 +4,7 @@ const queryString = require('query-string');
 
 
 const app = express();
+app.use(gateKeeper);
 
 // For this challenge, we're hard coding a list of users, because
 // we haven't learned about databases yet. Normally, you'd store
@@ -68,7 +69,7 @@ function gateKeeper(req, res, next) {
   const userQueryObject = queryString.parse(headerValue);
   console.log(userQueryObject);
   function findUser(qUser) {
-      return userQueryObject.userName === qUser.userName;
+      return userQueryObject.user === qUser.userName;
   }
   const userMatchObject = USERS.find(findUser);
   console.log(userMatchObject);
